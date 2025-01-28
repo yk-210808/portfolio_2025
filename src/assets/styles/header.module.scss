@@ -1,0 +1,131 @@
+.header {
+  max-width: 300px;
+  width: calc(100% - 60px);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #7c7c7c;
+  z-index: 50;
+  transition: transform 0.3s ease-in-out;
+
+  @media screen and (max-width: 768px){
+    max-width: 250px;
+  }
+
+  &:global.is_closed{
+    transform: translateX(300px);
+
+    @media screen and (max-width: 768px){
+      transform: translateX(250px);
+    }
+
+    .header-nav{
+      position: static;
+    }
+  }
+
+  :global {
+    .header-nav{
+      position: relative;
+    }
+
+    .header-button {
+      position: absolute;
+      left: -60px;
+      top: 0;
+
+      @media screen and (min-width: 769px) {
+        &:hover{
+          .inn {
+            background-color: #636363;
+          }
+        }
+      }
+
+      .inn{
+        display: block;
+        width: 60px;
+        height: 60px;
+        background-color: #7c7c7c;
+        margin-left: auto;
+        position: relative;
+        pointer-events: none;
+        transition: background-color 0.3s ease-in-out;
+
+        >span {
+          display: block;
+          width: 40px;
+          height: 4px;
+          background-color: #fff;
+          position: absolute;
+          right: 0;
+          left: 0;
+          margin: auto;
+          top: 0;
+          bottom: 0;
+          transition: all 0.3s ease-in-out;
+          opacity: 1;
+          transform: rotate(0deg);
+  
+          &:first-of-type {
+            top: 14px;
+            bottom: auto;
+          }
+  
+          &:last-of-type {
+            top: auto;
+            bottom: 14px;
+          }
+        }
+
+
+      }
+
+      &.is_active {
+        .inn{
+          >span {
+            &:nth-of-type(2) {
+              opacity: 0;
+            }
+  
+            &:first-of-type {
+              transform: translateY(14px) rotate(45deg);
+            }
+    
+            &:last-of-type {
+              transform: translateY(-14px) rotate(-45deg);
+            }
+          }
+        }
+      }
+    }
+
+    .link-area {
+
+      li{
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: capitalize;
+
+        >a{
+          display: flex;
+          width: 100%;
+          padding: 17px 20px;
+          transition: background-color 0.3s ease-in-out;
+
+          &.current {
+            background-color: #636363;
+            pointer-events: none;
+          }
+
+          @media screen and (min-width: 769px) {
+            &:hover{
+              background-color: #636363;
+            }
+          }
+        }
+      }
+    }
+  }
+}

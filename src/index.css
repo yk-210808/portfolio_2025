@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", Meiryo, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #333;
+}
+
+.inner-block {
+  max-width: calc(1440px + (2rem * 2));
+  width: 100%;
+  margin: 0 auto;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .inner-block{
+    max-width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+#mv canvas {
+  height: 100vh !important;
+  cursor: pointer;
+}
+
+/* component */
+.c-thumb {
+  width: 100%;
+  height: 0;
+  padding-top: 65%;
+  position: relative;
+  overflow: hidden;
+}
+
+.c-thumb img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+@media screen and (min-width: 769px){
+  .c-main{
+    width: calc(100% - 300px);
+  }
+
+  a:hover .c-thumb img {
+    transform: scale(1.2);
+  }
+}
+
+.c-skill-list li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.c-skill-list li + li {
+  margin-top: 10px;
+}
+
+.c-skill-list li i {
+  font-size: 48px;
+}
+
+.c-skill-list .name {
+  min-width: 150px;
+}
+
+.c-skill-list .text-items {
+  position: relative;
+  padding-left: 1.5em;
+  display: flex;
+  align-items: center;
+}
+
+.c-skill-list .text-items ::after{
+  position: absolute;
+  content: '';
+  width: 14px;
+  height: 1px;
+  background-color: #fff;
+  top: 11px;
+  left: 0;
+}
+
+@media screen and (max-width: 400px) {
+  .c-skill-list .text-items {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
