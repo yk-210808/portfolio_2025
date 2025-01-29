@@ -1,12 +1,12 @@
 .header {
   max-width: 300px;
   width: calc(100% - 60px);
-  height: 100vh;
+  height: 100svh;
   position: fixed;
   top: 0;
   right: 0;
   background-color: #7c7c7c;
-  z-index: 50;
+  z-index: 200;
   transition: transform 0.3s ease-in-out;
 
   @media screen and (max-width: 768px){

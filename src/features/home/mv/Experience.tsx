@@ -5,6 +5,7 @@ import { useRef, useEffect, useContext } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import { MvContext } from '../context/MvContext'
+import { isMobile } from 'react-device-detect'
 
 export const Experience = () => {
   const cameraControlsRef = useRef<CameraControls | null>(null)
@@ -24,11 +25,19 @@ export const Experience = () => {
           cameraControlsRef.current.enabled = true
           cameraControlsRef.current.reset(true)
 
-          cameraControl = [
-            cameraControlsRef.current.moveTo(0, 1.45, 1.6, true),
-            cameraControlsRef.current.zoomTo(7, true),
-            cameraControlsRef.current.rotateTo(Math.PI / 2, Math.PI / 2.3, true)
-          ]
+          if(isMobile) {
+            cameraControl = [
+              cameraControlsRef.current.moveTo(0, 1.45, 1.95, true),
+              cameraControlsRef.current.zoomTo(5, true),
+              cameraControlsRef.current.rotateTo(Math.PI / 2, Math.PI / 2.3, true)
+            ]
+          } else {
+            cameraControl = [
+              cameraControlsRef.current.moveTo(0, 1.45, 1.6, true),
+              cameraControlsRef.current.zoomTo(7, true),
+              cameraControlsRef.current.rotateTo(Math.PI / 2, Math.PI / 2.3, true)
+            ]
+          }
         }
 
         // mugi
@@ -90,9 +99,15 @@ export const Experience = () => {
       cameraControlsRef.current.mouseButtons.right = CameraControls.ACTION.NONE
       cameraControlsRef.current.mouseButtons.wheel = CameraControls.ACTION.NONE
 
-      cameraControlsRef.current.moveTo(1.3, -1.5, 0, false)
-      cameraControlsRef.current.zoomTo(4.5, false)
-      cameraControlsRef.current.rotateTo(0, 1.5 , false)
+      if(isMobile){
+        cameraControlsRef.current.moveTo(1.3, 0, 0, false)
+        cameraControlsRef.current.zoomTo(2, false)
+        cameraControlsRef.current.rotateTo(0, 1.5 , false)
+      }else{
+        cameraControlsRef.current.moveTo(1.3, -1.5, 0, false)
+        cameraControlsRef.current.zoomTo(4.5, false)
+        cameraControlsRef.current.rotateTo(0, 1.5 , false)
+      }
 
       setMvContext({...mvContext, isLoaded: true})
     }
@@ -120,10 +135,9 @@ export const Experience = () => {
         maxAzimuthAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 4}
         maxPolarAngle={Math.PI - Math.PI / 2}
-        maxDistance={14}
-
-        
+        maxDistance={isMobile ? 30 :14 }
       />
+
       <directionalLight position={[1, 2, 3]} intensity={10} />
       <ambientLight intensity={1.5} />
 
@@ -131,7 +145,7 @@ export const Experience = () => {
         rotation-y={- Math.PI * 0.5} 
         position-y={- 2.8}
         name='modelGroup'
-      >
+        >
         <Model />
       </group>
     </>

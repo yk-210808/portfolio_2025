@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import styles from '../../../assets/styles/header.module.scss'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { isMobile } from 'react-device-detect'
 
 const link = [
   {
@@ -23,7 +24,8 @@ const link = [
 ]
 
 export const Header = () => {
-  const menuActive = useRef<number>(1)
+  const defaultRef = isMobile ? 0 : 1
+  const menuActive = useRef<number>(defaultRef)
   const currentPath = useLocation().pathname
 
   const handleHeaderMenu = (e: React.MouseEvent) => {
@@ -42,9 +44,9 @@ export const Header = () => {
   }
 
   return (
-    <header className={`${styles.header} js--header`}>
+    <header className={`${styles.header} js--header ${isMobile ? 'is_closed' : ''}`}>
       <div className='header-nav'>
-        <button type="button" className='header-button is_active js--header-button' onClick={handleHeaderMenu}>
+        <button type="button" className={`header-button js--header-button ${isMobile ? '' : 'is_active'}`} onClick={handleHeaderMenu}>
           <span className='inn'>
             <span></span>
             <span></span>

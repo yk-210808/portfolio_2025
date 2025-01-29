@@ -26,9 +26,21 @@
   }
 }
 
-#mv canvas {
-  height: 100vh !important;
+/* #mv canvas {
+  height: 100svh !important;
   cursor: pointer;
+  position: fixed;
+} */
+
+.mv-block {
+  position: fixed !important;
+  width: 100% !important;
+  /* width: calc(var(--vw, 1vw) * 100); */
+  height: 100% !important;
+  /* height: calc(var(--vh, 1vh) * 100); */
+  top: 0;
+  left: 0;
+  overflow: hidden;
 }
 
 /* component */

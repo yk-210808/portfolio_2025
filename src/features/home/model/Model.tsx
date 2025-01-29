@@ -6,6 +6,7 @@ import { EffectComposer, Selection, Outline } from '@react-three/postprocessing'
 
 import { ObjToPrimitive } from './ObjToPrimitive'
 import { MvContext } from '../context/MvContext'
+import { isMobileOnly } from 'react-device-detect'
 
 type TypeHoveredObject = {
   desk: boolean,
@@ -49,8 +50,9 @@ export const Model = () => {
   const deskRef = useRef<THREE.Group>(null);
   const mugiRef = useRef<THREE.Group>(null);
   const monitor = scene.getObjectByName('monitor')
+  const iframePosition = new THREE.Vector3(monitor?.position.x, (monitor?.position.y ?? 0) - 0.005, (monitor?.position.z ?? 0))
   const { mvContext, setMvContext } = useContext(MvContext)
-  
+
   // Mouse
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -89,7 +91,8 @@ export const Model = () => {
       }
     }
   });
-  
+
+
   /**
    * Functions
   */
@@ -123,7 +126,11 @@ export const Model = () => {
     const togglePanFlg = (flg:boolean, name: string) => {
       const objectName = name === 'monitor' ? 'desk' : name
 
-      setMvContext({...mvContext, panFlg: flg, panObjectName: objectName}) 
+      if(isMobileOnly && objectName === 'desk'){
+        window.location.href = 'https://works.mumumugi.com/'
+      }else{
+        setMvContext({...mvContext, panFlg: flg, panObjectName: objectName}) 
+      }
     }
 
     const handleOutlineSelection = () => {
@@ -140,7 +147,6 @@ export const Model = () => {
       }
       return returnObjects
     }
-    
 
   return (
     <>
@@ -164,26 +170,30 @@ export const Model = () => {
       >
         <Selection>
           <ObjToPrimitive obj={models.desk.scene} texture={textures.desk}>
-            <group position={monitor?.position} >
+            <group>
               <Html
                 transform
                 wrapperClass="htmlScreen"
-                distanceFactor={0.651}
+                // distanceFactor={0.651}
+                distanceFactor={1}
                 rotation-y={Math.PI}
                 pointerEvents={panFlg ? 'auto' : 'none'}
-                // occlude
+                position={iframePosition}
+                scale={1}
               >
-                <iframe 
-                  id="iframe" 
-                  src="https://works.mumumugi.com/" 
-                  width="1414px" 
-                  height="889px"
-                />
+                <div className="[-webkit-overflow-scrolling:touch!important] overflow-auto relative w-[920px] h-[576px]">
+                  <iframe 
+                    id="iframe" 
+                    src="https://works.mumumugi.com/" 
+                    className='w-full h-full border-0 block absolute top-0 left-0'
+                  />
+                </div>
               </Html>
             </group>
           </ObjToPrimitive>
         </Selection>
       </group>
+
 
       {/* wall */}
       <group dispose={null} >
