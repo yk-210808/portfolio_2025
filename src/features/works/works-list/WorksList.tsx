@@ -60,6 +60,7 @@ export const WorksList: React.FC<Props> = ({ current }) => {
           </a>
           {/* github */}
           {work.acf.git && <a href={work.acf.git} target="_blank" className="text-2xl inline-block mt-4 transition ease-in-out duration-300 hover:text-blue-500"><i className="devicon-github-original"></i></a>}
+          {work.acf.design && <a href={work.acf.design} target="_blank" className="text-2xl inline-block mt-4 ml-4 transition ease-in-out duration-300 hover:text-blue-500"><i className="devicon-figma-plain"></i></a>}
         </li>
       ))}
     </ul>

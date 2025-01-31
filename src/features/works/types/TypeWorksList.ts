@@ -6,7 +6,8 @@ export interface TypeWorksList {
     url: string,
     git: string,
     created: string,
-    updated: string
+    updated: string,
+    design: string
   },
   taxonomy: string[],
   date: string,
