@@ -1,6 +1,6 @@
 import { Badge } from "flowbite-react";
 import parse from 'html-react-parser';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Api } from "../api";
 import Option from "../option";
@@ -10,11 +10,20 @@ type Props = {
   current: string;
 }
 
+function triggerEvent(element: Element, event: string) {
+  if (document.createEvent) {
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent(event, true, true );
+      return element.dispatchEvent(evt);
+  }
+}
+
 export const WorksList: React.FC<Props> = ({ current }) => {
   const works = Api().works;
   const tagOption = Option
   const defaultColor = 'default'
   const [worksList, setWorksList] = useState([]);
+  const listRef = useRef<HTMLUListElement>(null)
 
   const getTagColor = (tag: string) => tagOption.find((item) => item.label === tag)?.color || defaultColor
   const formatDate = (date: string) => date.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')
@@ -34,8 +43,22 @@ export const WorksList: React.FC<Props> = ({ current }) => {
     }
   }, [current])
 
+  // 画面幅が狭い場合、ヘッダーを収納
+  useEffect(() => {
+    if (listRef.current) {
+      const listWidth = listRef.current.getBoundingClientRect().width
+      const windowWidth = window.innerWidth
+      const headerWidth = 300
+      const headerTrigger = document.getElementsByClassName('js--header-button')[0]
+      
+      if((windowWidth - listWidth) / 2 <= headerWidth && headerTrigger.classList.contains('is_active')) {
+        triggerEvent(headerTrigger, 'click')
+      }
+    }
+  }, [])
+
   return (
-    <ul className="grid md:grid-cols-2 lg:grid-cols-4 mt-10 gap-5">
+    <ul className="grid md:grid-cols-2 lg:grid-cols-4 mt-10 gap-5" ref={listRef}>
       {worksList[0] && worksList.map((work: TypeWorksList, index) => (
         <li key={index}>
           <a href={work.acf.url} target="_blank">
