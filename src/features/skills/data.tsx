@@ -6,6 +6,7 @@ const Data = [
     startDate: null,
     icon: 'devicon-html5-plain-wordmark colored',
     type: 'language',
+    month: null,
   },
   {
     name: 'jQuery',
@@ -14,6 +15,7 @@ const Data = [
     startDate: null,
     icon: 'devicon-jquery-plain-wordmark colored',
     type: 'language',
+    month: null,
   },
   {
     name: 'PHP',
@@ -22,6 +24,7 @@ const Data = [
     startDate: null,
     icon: 'devicon-php-plain colored',
     type: 'language',
+    month: null,
   },
   {
     name: 'Scss',
@@ -30,14 +33,16 @@ const Data = [
     startDate: null,
     icon: 'devicon-sass-original colored',
     type: 'language',
+    month: null,
   },
   {
     name: 'TypeScript',
     calcFlag: true,
     year: null,
-    startDate: '2024-11',
+    startDate: null,
     icon: 'devicon-typescript-plain colored',
     type: 'language',
+    month: 3,
   },
 
   {
@@ -46,23 +51,26 @@ const Data = [
     year: 3,
     startDate: null,
     icon: 'devicon-wordpress-plain',
-    type: 'framework'
+    type: 'framework',
+    month: null,
   },
   {
     name: 'React',
     calcFlag: true,
     year: null,
-    startDate: '2024-11',
+    startDate: null,
     icon: 'devicon-react-original colored',
-    type: 'framework'
+    type: 'framework',
+    month: 3,
   },
   {
     name: 'Three.js',
     calcFlag: true,
     year: null,
-    startDate: '2024-10',
+    startDate: null,
     icon: 'devicon-threejs-original',
-    type: 'framework'
+    type: 'framework',
+    month: 4,
   },
 
   {
@@ -71,7 +79,8 @@ const Data = [
     year: 3,
     startDate: null,
     icon: 'devicon-git-plain colored',
-    type: 'others'
+    type: 'others',
+    month: null,
   },
   {
     name: 'VSCode',
@@ -79,15 +88,17 @@ const Data = [
     year: 3,
     startDate: null,
     icon: 'devicon-vscode-plain colored',
-    type: 'others'
+    type: 'others',
+    month: null,
   },
   {
     name: 'Blender',
     calcFlag: true,
     year: null,
-    startDate: '2024-11',
+    startDate: null,
     icon: 'devicon-blender-original colored',
-    type: 'others'
+    type: 'others',
+    month: 4,
   },
 ]
 

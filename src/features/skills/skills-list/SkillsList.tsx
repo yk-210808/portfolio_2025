@@ -25,15 +25,24 @@ export const SkillsList = () => {
     }
   }
 
-  const getYearAndMonth = (calcFlag: boolean, year: number | null, startDate: string | null) => {
+  const getYearAndMonth = (calcFlag: boolean, year: number | null, startDate: string | null, month: number | null) => {
     if (calcFlag && startDate) {
       return calc(startDate)
     } else if (year) {
-      return year + unit(year)
+      return year + unit(year, true)
+    } else if (!year && month) {
+      return month + unit(month)
     }
   }
 
-  const unit = (year: number) => year > 1 ? 'years' : 'year'
+  const unit = (num: number, yearFlg?: boolean) => {
+    const unit = yearFlg ? 'year' : 'month'
+    if (num > 1) {
+      return unit + 's'
+    } else {
+      return unit
+    }
+  }
 
   const List = ({ item, index }: ListProps) => {
     return (
@@ -41,7 +50,7 @@ export const SkillsList = () => {
         <i className={item.icon}></i>
         <div className="text-items">
           <p className="name">{item.name}</p>
-          <p>{getYearAndMonth(item.calcFlag, item.year, item.startDate)}</p>
+          <p>{getYearAndMonth(item.calcFlag, item.year, item.startDate, item.month)}</p>
         </div>
       </li>
     )
